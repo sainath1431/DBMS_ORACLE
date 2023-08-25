@@ -1,0 +1,290 @@
+create table studentdata1(USN number(3) primary key, NAME varchar2(20), GENDER varchar2(20), AGE number(2) , MARKS number(2));
+
+insert into studentdata1 values(120,'RAM','MALE',21,85);
+insert into studentdata1 values(121,'RAVI','MALE',20,88);
+insert into studentdata1 values(122,'KAVITHA','FEMALE',22,90);
+insert into studentdata1 values(123,'ARJUN','MALE',22,87);
+insert into studentdata1 values(124,'ANJUNA','FEMALE',21,75);
+
+
+
+------------------------------PROJECTIONS-----------------------------------------------------------------
+--Projection means choosing which columns (or expressions) the query shall return.
+--Projection is a process of displaying the result using project queries.
+--Project queries are all those queries which is used to display(Project) particular columns to the user based on the requirement from the user.
+
+--Q1) Write a query to display AGE and MARKS of all the students.
+
+SELECT AGE, MARKS FROM STUDENTDATA1;
+
+AGE	MARKS
+21	85
+20	88
+22	90
+22	87
+21	75
+
+--Q2) Write a query to display NAME  and USN of the student whose age is greater than 21.
+
+SELECT NAME, MARKS FROM STUDENTDATA1 WHERE AGE>21;
+
+
+NAME	MARKS
+KAVITHA	90
+ARJUN	87
+
+------------------------------------------------SELECTION-----------------------------------------------------------
+--Selection means which rows are to be returned.
+--Selection is the process of displaying the result using select queries.
+--Select queries which displays particular rows to the user base on specific conditions.
+
+--Q3)Write a query to display all the information of student name "KAVITHA".
+
+SELECT * FROM STUDENTDATA1 WHERE NAME='KAVITHA';
+
+USN	NAME	GENDER	AGE	MARKS
+122	KAVITHA	FEMALE	22	90
+
+--Q4)Write a query to display NAME,GENDER and USN of student named "RAVI".
+
+SELECT NAME, GENDER, USN FROM STUDENTDATA1 WHERE NAME='RAVI';
+
+NAME	GENDER	USN
+RAVI	MALE	121
+
+------------------------------------CASE SENSITIVITY IN SQL---------------------------------------------------------
+--The SQL keywords are CASE-INSENSITIVE(SELECT,FROM, WHERE,AS,ORDER BY,HAVING,GROUP BY etc), but are usually written in all capitals.
+
+--1.KEYWORDS IN SQL IS NOT CASE SENSITIVE.
+--2.TABLE NAMES IN SQL ARE NOT CASE SENSITIVE.
+--3.COLUMN NAMES IN SQL ARE NOT CASE SENSITIVE.
+--4.DATA IN SQL IS CASE SENSITIVE.
+
+--Example 1
+
+--RAVI data is case Sensitive so output is display
+
+SeleCt nAME, AgE FROm StuDentData1 wheRe NaMe = 'RAVI';
+
+NAME	AGE
+RAVI	20
+1 rows returned in 1.74 seconds	
+
+--Here ravi data is case Sensitive and below data is not present in table so output is no data found.
+
+SeleCt nAME, AgE FROm StuDentData1 wheRe NaMe = 'ravi';
+
+no data found
+
+-------------------------------------------DATATYPES IN SQL------------------------------------------------------
+
+--A data type specifies a particular type of data, such as integer, floating-point, Boolean etc.
+
+--A data type also specifies the possible values for that type, the operations that can be performed on that type and the way the values of that
+type are stored.
+
+--Oracle provides the following built-in datatypes :
+
+--Character Datatypes
+                 --i)CHAR Datatype
+                 --ii)VARCHAR2 and VARCHAR Datatypes
+                 --iii)LONG Datatype.
+
+--NUMBER Datatype
+               FLOAT Datatype
+--DATE Datatype
+
+------------------------------------------OPERATORS----------------------------------------------------------------
+
+--An operator is a reserved word or a character used primarily in an SQL statement's WHERE clause to perform operations(s), such as comparisons and arithmetic operations. These Operators are used to specify conditions in an SQL statement and to serve as conjunctions for multiple 
+Conditions in a statement.
+
+--For Example.
+
+CREATE TABLE EMPINFO(EID NUMBER(4) PRIMARY KEY, ENAME VARCHAR2(20), COMPANY VARCHAR2(20),SALARY NUMBER(10,2));
+
+INSERT INTO EMPINFO VALUES(1001,'SAINATH','GOOGLE',28000.00);
+INSERT INTO EMPINFO VALUES(1002,'SHUBHAM','MICROSOFT',30000.00);
+
+SELECT * FROM EMPINFO;
+
+EID	ENAME	  COMPANY  	SALARY
+1001	SAINATH	  GOOGLE        28000
+1002	SHUBHAM	  MICROSOFT	30000
+
+--We want to increase the salary by 2000 display the  ENAME,SALARY.
+
+SELECT ENAME,SALARY+2000 FROM EMPINFO;
+
+ENAME	SALARY+2000
+SAINATH	  30000
+SHUBHAM	  32000
+
+--We want to calculate the annual salary and display the ENAME,SALARY.
+
+SELECT ENAME,SALARY*12 FROM EMPINFO;
+
+ENAME	SALARY*12
+SAINATH	336000
+SHUBHAM	360000
+
+--We want to Calculate the Half-annual Salary and display the ENAME,SALARY.
+
+SELECT ENAME,SALARY*6 FROM EMPINFO;
+
+ENAME	SALARY*6
+SAINATH	168000
+SHUBHAM	180000
+
+OPERATORS             NAME           PRECENDANCE
+    +                 ADD                 3
+    -                 SUB                 4
+    *                 MUL                 1
+    /                 DIV                 2
+
+----------------------------COLUMN ALIAS----------------------------------------------------------------------------
+
+Aliases are the other names given to columns in SQL.
+Whenever aliases names have to be specified for columns then following syntax has to be used 
+
+Column_name as alias_name;
+        OR
+Column_name "alias_name";
+
+NOTE: The alias names will never be reflected in the actual tables present on the hard disk of the computer.
+
+Example :
+
+-- TO CHANGE THE EID AND ENAME BY ITS ALIAS AND THEIR ARE AS EMPLOYEE_ID,EMPLOYEE_NAME.
+
+ -----------EMPINFO----------------
+
+EID	ENAME	  COMPANY  	SALARY
+1001	SAINATH	  GOOGLE        28000
+1002	SHUBHAM	  MICROSOFT	30000
+
+SELECT EID AS EMPLOYEE_ID,ENAME AS EMPLOYEE_NAME,COMPANY, SALARY FROM EMPINFO;
+
+EMPLOYEE_ID	EMPLOYEE_NAME	COMPANY  	SALARY
+1001	           SAINATH	GOOGLE	        28000
+1002	           SHUBHAM	MICROSOFT	30000
+
+--------------------------------DISTINCT KEYWORD-----------------------------------------------------------
+
+There may be a situation when you need to retrieve unique records and not multiple duplicate records. The SQL DISTINCT keyword is used after 
+SELECT to eliminate duplicate records and fetch only unique records
+
+NOTE 1: Distinct Keyword is used to avoid displaying of repeated values.
+
+SELECT * FROM STUDENTDATA1;
+
+            STUDENTDATA1
+
+USN	NAME	GENDER	AGE	MARKS
+120	RAM	MALE	21	85
+121	RAVI	MALE	20	88
+122	KAVITHA	FEMALE	22	90
+123	ARJUN	MALE	22	87
+124	ANJUNA	FEMALE	21	75
+
+-- To select the unique AGE from the STUDENTDATA1.
+
+SELECT DISTINCT AGE FROM STUDENTDATA1;
+
+AGE
+22
+21
+20
+
+-------------------------------------CONCATENATION OPERATOR-------------------------------------------------------
+
+NOTE1: The operator || is the concatenation operator in SQL.
+
+NOTE2: Concatenation operator is used to combine multiple data or multiple columns.
+
+--Example :
+
+SELECT * FROM STUDENTDATA1;
+
+            STUDENTDATA1
+
+USN	NAME	GENDER	AGE	MARKS
+120	RAM	MALE	21	85
+121	RAVI	MALE	20	88
+122	KAVITHA	FEMALE	22	90
+123	ARJUN	MALE	22	87
+124	ANJUNA	FEMALE	21	75
+
+EX1:
+    
+SELECT NAME || AGE AS "NAME & AGE" FROM STUDENTDATA1;
+
+      NAME & AGE
+      RAM21
+      RAVI20
+      KAVITHA22
+      ARJUN22
+      ANJUNA21
+
+EX2:
+
+SELECT NAME||'AGED'||AGE AS "STUDEDNT_DETATLS" FROM STUDENTDATA1;
+
+   STUDEDNT_DETATLS
+   RAMAGED21
+   RAVIAGED20
+   KAVITHAAGED22
+   ARJUNAGED22
+   ANJUNAAGED21
+
+NOTE : In Concatenation Operator if want add data write within ('data') or want to write coloumnname as alias ("column_name").
+
+--------------------------------------------DUAL TABLE-------------------------------------------------------------
+
+The DUAL Table is a special one-row , one-column table present by default in Oracle and other database installations 
+In Oracle, the table has a single varchar2(1) column called DUMMY that has a value of 'x'.
+
+If the query "select * from dual" is executed then following will be the output :
+
+
+--To display the DUAL Table.
+
+SELECT * FROM DUAL;
+
+    DUMMY
+     X
+
+--Want to see how DUAL table looks like or what is the structure?
+
+DESC DUAL;
+
+Table	Column	Data Type	Length	Precision	Scale	Primary Key	Nullable	Default	Comment
+DUAL	DUMMY	VARCHAR2	  1	   -	           -	    -	         nullable	   -	   -  
+                                                                                                     1 - 1
+--You can also check the system date from the DUAL table using the following statement.
+
+SELECT SYSDATE FROM DUAL;
+		
+SYSDATE
+08/25/2023
+
+--You can also check the arithmetic calculations from the DUAL table using the following statements.
+
+SELECT 18+52-7*4/9 FROM DUAL;
+
+18+52-7*4/9
+66.8888888888888888888888888888888888889
+
+NOTE : if we want to see how the structure is of any table then we have to used DESC.
+
+DESC STUDENTDATA1;
+
+Table	Column	Data Type	Length	Precision	Scale	Primary Key	Nullable	Default	Comment
+STUDENTDATA1	USN	NUMBER	-	3	0	1	-	-	-
+ 	NAME	VARCHAR2	20	-	-	-	nullable	-	-
+ 	GENDER	VARCHAR2	20	-	-	-	nullable	-	-
+ 	AGE	NUMBER	-	2	0	-	nullable	-	-
+ 	MARKS	NUMBER	-	2	0	-	nullable	-	-
+1 - 5	
+
+------------------------------------------------------------------------------------------------------------------------------------------------
