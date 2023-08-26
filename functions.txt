@@ -1,0 +1,236 @@
+-----------------------------------FUNCTIONS-------------------------------DATA : 26 AUGUST 2023
+
+--In sql we have two types functions :
+
+1) Single row functions.
+2) Multiple row functions.
+
+Single row functions are such functions which will accept a single row as input(or) it accept multiple row as input but produces one result per row.
+
+Multiple row functions / group functions / aggregate functions are such functions which will accept a single row or multiple row as input produce 
+one result per group.
+
+Q.NO.1) Write a query to display NAME of all the students in LOWER case letters from table STUDENT.
+
+SELECT LOWER(NAME) FROM STUDENTDATA1;
+
+LOWER(NAME)
+ram
+ravi
+kavitha
+arjun
+anjuna
+
+Q.NO.2)Write a query to display initial letter capital of data 'RITWIK'.
+
+SELECT INITCAP('RITWIK') AS "INITIAL" FROM DUAL;
+
+INITIAL
+Ritwik
+
+Q.NO.3)Write a query to display all the names and gender of the students in lower case which gender is 'male'.
+
+SELECT LOWER(NAME),LOWER(GENDER) FROM STUDENTDATA1 WHERE GENDER='MALE';
+
+LOWER(NAME)	LOWER(GENDER)
+ram	            male
+ravi	            male
+arjun	            male
+
+Q.NO.5)Write a query to concatenate data 'Ritwik'&'Raj'.
+
+SELECT 'Ritwik'||'Raj' FROM DUAL;
+
+'RITWIK'||'RAJ'
+RitwikRaj
+
+Q.NO.5)Write a query to find length of string.
+
+SELECT LENGTH('RITWIK') FROM DUAL;
+
+LENGTH('RITWIK')
+6
+
+Q.NO.6)Write a query to display the substring of string 'sudeshna' from 3rd position exact 6 characters.
+
+SELECT SUBSTR('Sudeshna',3,6) FROM DUAL;
+
+SUBSTR('SUDESHNA',3,6)
+deshna
+
+Q.NO.7)Write a query to display the position of the character 'a' in the string 'chatteerjee'.
+
+SELECT INSTR('CHATTEERJEES','A') FROM DUAL;
+
+INSTR('CHATTEERJEES','A')
+3
+
+Q.NO.8)Write a query to trim the leading 'a' in the string 'akash'.
+
+SELECT TRIM( leading 'a' from 'akash') FROM DUAL;
+
+TRIM(LEADING'A'FROM'AKASH')
+kash
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q.NO.9) Write a query to trim the trailing 'a' in the string 'angelina'.
+
+SELECT TRIM(trailing 'a' from 'angelina')FROM DUAL;
+
+TRIM(TRAILING'A'FROM'ANGELINA')
+angelin
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+Q.NO.10)Write a query to display the data 'Ritwik' in the format '@@@@Ritwik'.
+
+SELECT lpad('Ritwik',10,'@') FROM DUAL;
+
+LPAD('RITWIK',10,'@')
+@@@@Ritwik
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q.NO.11)Write a query to display the data 'Ritwik' in the format 'Ritwik@@@@'.
+
+SELECT rpad('Ritwik',10,'@') FROM DUAL;
+
+RPAD('RITWIK',10,'@')
+Ritwik@@@@
+------------------------------------------------------------------------------------------------------------------------------------------------
+Q.NO.12) What should be the output of following query.
+
+SELECT ROUND(95.528,2) FROM DUAL;
+
+ROUND(95.528,2)
+95.53
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q.NO.13)What would be the output of the following query.
+
+SELECT TRUNC(135.256,2) FROM DUAL;
+
+TRUNC(135.256,2)
+135.25
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q.NO.14)What would be the output of the following query.
+
+SELECT MOD(60,2) FROM DUAL;
+
+
+MOD(60,2)
+0
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+Q.NO.15)Write a query to display the age. if age is null present with out.
+
+SELECT NVL(AGE,0) FROM STUDENTDATA2;
+
+NVL(AGE,0)
+21
+22
+22
+21
+20
+0
+0
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+Q.NO.16)Write a query to display the age if age is null replace with 0 else replace with 28.
+
+SELECT NVL2(AGE,28,0) FROM STUDENTDATA2;
+
+NVL2(AGE,28,0)
+28
+28
+28
+28
+28
+0
+0
+
+-------------------------------------------------------------------------------------------------------------------------------------------------Q.NO.17) Write the query to display the number of months between the dates 24-dec-2018 and 24-mar-2018.
+
+SELECT MONTHS_BETWEEN('24-DEC-2018', '24-MAR-2018') FROM DUAL;
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+Q.NO.18) Write the query in order to add 7 months for the data 24-mar-2018.
+
+SELECT ADD_MONTHS('24-DEC-2018',7) FROM DUAL;
+
+------------------------------------------------------------------------------------------------------------------------------------------------
+Q.NO.19) Write the query to find the date of the next friday after the date 14-feb-2014.
+
+SELECT NEXT_DAY('14-FEB-14','FRIDAY') FROM DUAL;
+------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+-------------------------------------------------NULLIF()-----------------------------------------------------
+
+--The oracle NULLIF() function accepts two arguments. It returns a null value if the two arguments are equal.
+--In case the arguments are not equal , the NULLIF() function returns the first arguments.
+
+SELECT NULLIF(100,100) FROM DUAL;
+
+NULLIF(100,100)
+-
+
+SELECT NULLIF(100,200) FROM DUAL;
+
+NULLIF(100,200)
+100
+------------------------------------------------------------------------------------------------------------------------------------------------
+Q.NO.20) Write a query to display the l_name, hire_date where the hire_date should be displayed in the format dd/mm.
+
+SELECT L_NAME TO_CHAR(HIRE_DATE,'DD/MM') FROM EMP1;
+
+-----------------------------------------------------------------------------------------------------------------------------------
+Q.NO.21) Write a query to display the I_name and salary. the salary should be displayed in the format '$99999.99'.
+
+SELECT L_NAME TO_CHAR(SALARY,'$99999.99') FROM EMP1;
+
+-------------------------------------------------------------------------------------------------------------------------------------------------
+-------------------------------------MULTIPLE-ROW-FUNCTION/AGGREGRATE FUNCTIONS---------------------------------------------------
+
+Q.NO.1) Write a query to display count of all the rows to present in student table.
+
+SELECT COUNT(*) FROM STUDENTDATA2;
+
+COUNT(*)
+7
+------------------------------------------------------------------------------------------
+Q.NO.2) Write a query to display count of DISTINCT AGE present in STUDENT TABEL.
+
+SELECT COUNT(AGE) FROM STUDENTDATA2;
+
+COUNT(AGE)
+5
+-----------------------------------------------------------------------------------------------
+Q.NO.3) write the query to display the minimum of all age present in student table.
+
+SELECT MIN(AGE) FROM STUDENTDATA2;
+MIN(AGE)
+20
+-------------------------------------------------------------------------------------------------
+Q.NO.4) Write the query to display the MAXIMUM of all age present in student table.
+
+SELECT MAX(AGE) FROM STUDENTDATA2;
+MAX(AGE)
+22
+------------------------------------------------------------------------------------------------------
+Q.NO.5) Write the query to display the sum of all the marks present in the student table.
+
+SELECT SUM(MARKS) FROM STUDENTDATA2;
+SUM(MARKS)
+587
+
+-------------------------------------------------------------------------------------------------------
+Q.NO.6) Write the query to display the average. of all marks present in the student table.
+
+SELECT AVG(MARKS) FROM STUDENTDATA2;
+AVG(MARKS)
+83.85
+-------------------------------------------------------------------------------------------------------------------------------------------------
